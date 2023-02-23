@@ -44,8 +44,22 @@ sudo docker compose ps
 ```sh
 sudo docker compose exec app-csv bash
 ```
-
+### Ejecuciones dentro del contenedor
 Dentro del ambiente de desarrollo del contenedor, se puede ejecutar la aplicación main:
 ```sh
 python main.py
+```
+
+### Sincronizando el contenedor con el sistema de archivos
+Para facilitar el desarrollo de la aplicación y a medida que se vaya editando los diferentes archivos del proyecto, es posible sincronizar el contenedor para que en tiempo real se actualicen estos archivos.
+
+Para lograr lo anterior, simplemente se agrega al archivo **docker-compose.yml**
+```docker
+services:
+  app-csv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
 ```
